@@ -5,13 +5,11 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -26,24 +24,33 @@ public class QuizApp extends Application {
 
     // Quiz-logikk
     private int currentQuestion = 1;
-    private final int totalQuestions = 10;
+    private int totalQuestions = 10; // Standard = 10, men kan endres via spillkonfigurasjon.
     private int score = 0;
     private String playerName;
 
     // Flaghåndtering
     private FlagManager flagManager;
-    private List<Flag> flags;
-    private List<Flag> unusedFlags; // Liste med flagg som ennå ikke er brukt i runden.
+    private List<Flag> flags;            // Alle flagg
+    private List<Flag> activeFlags = new ArrayList<>(); // Flagg valgt i GameConfigPanel
+    private List<Flag> unusedFlags;      // For å unngå gjentakelser i en runde
     private Flag currentFlag;
 
-    // UI-komponenter
+    // Scenes
+    private Scene mainMenuScene;
+    private Scene quizScene;
+
+    // UI-komponenter for quiz-scenen
     private Label questionLabel;
     private Label scoreLabel;
     private ImageView flagView;
     private Button[] answerButtons;
 
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+
         // Spør bruker om navn
         TextInputDialog nameDialog = new TextInputDialog();
         nameDialog.setTitle("Quiz App");
@@ -57,27 +64,78 @@ public class QuizApp extends Application {
         // Initialiser flagg-data
         flagManager = new FlagManager();
         flags = flagManager.getFlags();
-        // Lag en kopi av alle flagg for denne quizen slik at vi kan unngå å bruke det samme flagget mer enn én gang.
+
+        // Standard: ingen flagg valgt i GameConfigPanel => bruk alle
         unusedFlags = new ArrayList<>(flags);
 
-        // Opprett hovedlayout med BorderPane
-        BorderPane root = new BorderPane();
+        // Bygg hovedmeny
+        buildMainMenuScene();
 
-        // Toppfelt: Spørsmål, admin-knapp og poeng
+        primaryStage.setTitle("Quiz App - " + playerName);
+        primaryStage.setScene(mainMenuScene);
+        primaryStage.show();
+    }
+
+    /**
+     * Bygger hovedmenyen med tre alternativer.
+     */
+    private void buildMainMenuScene() {
+        VBox menuLayout = new VBox(20);
+        menuLayout.setAlignment(Pos.CENTER);
+        menuLayout.setPadding(new Insets(20));
+
+        Label titleLabel = new Label("Quiz App");
+        titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+
+        Button startGameButton = new Button("Start nytt spill");
+        Button gameConfigButton = new Button("Adminpanel - Spillkonfig");
+        Button settingsButton = new Button("Innstillinger - Flaggadministrasjon");
+
+        // Start quiz
+        startGameButton.setOnAction(e -> startQuiz());
+
+        // Åpner GameConfigPanel, der admin kan velge antall spørsmål + spesifikke flagg
+        gameConfigButton.setOnAction(e -> {
+            GameConfigPanel configPanel = new GameConfigPanel(flagManager, this);
+            configPanel.show();
+        });
+
+        // Åpner flagg-administrasjon
+        settingsButton.setOnAction(e -> new AdminPanel(flagManager).show());
+
+        menuLayout.getChildren().addAll(titleLabel, startGameButton, gameConfigButton, settingsButton);
+        mainMenuScene = new Scene(menuLayout, 600, 400);
+    }
+
+    /**
+     * Starter en ny quiz.
+     */
+    private void startQuiz() {
+        currentQuestion = 1;
+        score = 0;
+
+        // Hvis admin har valgt noen flagg i GameConfigPanel, bruk dem.
+        // Ellers bruk alle (flags).
+        List<Flag> quizFlags = (activeFlags != null && !activeFlags.isEmpty())
+                ? activeFlags : flags;
+
+        unusedFlags = new ArrayList<>(quizFlags);
+
+        // Bygg quiz-scenen
+        BorderPane quizLayout = new BorderPane();
+
+        // Toppfelt: Spørsmål, tilbake-knapp, og poeng
         HBox topBar = new HBox();
         topBar.setPadding(new Insets(10));
         topBar.setAlignment(Pos.CENTER);
         questionLabel = new Label("Spørsmål: " + currentQuestion + " / " + totalQuestions);
-        Button adminButton = new Button("Admin");
-        adminButton.setOnAction(e -> {
-            AdminPanel adminPanel = new AdminPanel(flagManager);
-            adminPanel.show();
-        });
         scoreLabel = new Label("Poeng: " + score);
+        Button backButton = new Button("Hovedmeny");
+        backButton.setOnAction(e -> primaryStage.setScene(mainMenuScene));
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        topBar.getChildren().addAll(questionLabel, spacer, adminButton, scoreLabel);
-        root.setTop(topBar);
+        topBar.getChildren().addAll(questionLabel, spacer, backButton, scoreLabel);
+        quizLayout.setTop(topBar);
 
         // Sentrumsdel: Flaggbilde og svaralternativer
         VBox centerBox = new VBox(20);
@@ -100,18 +158,14 @@ public class QuizApp extends Application {
             answerButtons[i].setMinWidth(100);
             int index = i;
             answerButtons[i].setOnAction(e -> handleAnswer(answerButtons[index].getText()));
+            answersGrid.add(answerButtons[i], i % 2, i / 2);
         }
-        answersGrid.add(answerButtons[0], 0, 0);
-        answersGrid.add(answerButtons[1], 1, 0);
-        answersGrid.add(answerButtons[2], 0, 1);
-        answersGrid.add(answerButtons[3], 1, 1);
         centerBox.getChildren().add(answersGrid);
-        root.setCenter(centerBox);
 
-        Scene scene = new Scene(root, 600, 400);
-        primaryStage.setTitle("Quiz App - " + playerName);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        quizLayout.setCenter(centerBox);
+
+        quizScene = new Scene(quizLayout, 600, 400);
+        primaryStage.setScene(quizScene);
 
         updateQuestionWithAnimation();
     }
@@ -120,13 +174,11 @@ public class QuizApp extends Application {
      * Oppdaterer spørsmålet med en fade-out/fade-in effekt.
      */
     private void updateQuestionWithAnimation() {
-        // Først fade ut flaggbildet
         FadeTransition fadeOut = new FadeTransition(Duration.millis(300), flagView);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(e -> {
             updateQuestionContent();
-            // Deretter fade inn flaggbildet
             FadeTransition fadeIn = new FadeTransition(Duration.millis(300), flagView);
             fadeIn.setFromValue(0.0);
             fadeIn.setToValue(1.0);
@@ -136,20 +188,20 @@ public class QuizApp extends Application {
     }
 
     /**
-     * Oppdaterer innholdet i spørsmålet (valg av nytt flagg, oppdatering av svaralternativer).
+     * Oppdaterer innholdet i spørsmålet (velger nytt flagg og oppdaterer svaralternativer).
      */
     private void updateQuestionContent() {
         if (currentQuestion > totalQuestions) {
             finishQuiz();
             return;
         }
-
         questionLabel.setText("Spørsmål: " + currentQuestion + " / " + totalQuestions);
-        // Sørg for at vi ikke går tom for spørsmål. Hvis listen er tom, kan vi reinitialisere den,
-        // men det betyr at spørsmål kan gjentas dersom antallet spørsmål i quizen overstiger antall unike flagg.
+
+        // Hvis vi går tom for flagg, reinitialiser
         if (unusedFlags.isEmpty()) {
-            unusedFlags = new ArrayList<>(flags);
+            unusedFlags = new ArrayList<>(getActiveFlagsOrAll());
         }
+
         Random rand = new Random();
         int index = rand.nextInt(unusedFlags.size());
         currentFlag = unusedFlags.remove(index);
@@ -158,21 +210,31 @@ public class QuizApp extends Application {
         // Lag svaralternativer: korrekt svar + distraktorer
         List<String> alternatives = new ArrayList<>();
         alternatives.add(currentFlag.getCountry());
-        List<Flag> distractors = new ArrayList<>(flags);
+
+        // Distraktorer fra enten activeFlags eller flags
+        List<Flag> distractors = new ArrayList<>(getActiveFlagsOrAll());
         distractors.remove(currentFlag);
+
         Collections.shuffle(distractors);
         for (int i = 0; i < 3 && i < distractors.size(); i++) {
             alternatives.add(distractors.get(i).getCountry());
         }
         Collections.shuffle(alternatives);
+
         for (int i = 0; i < answerButtons.length; i++) {
             answerButtons[i].setText(alternatives.get(i));
         }
     }
 
     /**
+     * Returnerer enten de admin-valgte flaggene, eller alle, hvis ingen er valgt.
+     */
+    private List<Flag> getActiveFlagsOrAll() {
+        return (activeFlags != null && !activeFlags.isEmpty()) ? activeFlags : flags;
+    }
+
+    /**
      * Håndterer svar når en knapp trykkes med animasjon for korrekt/feil svar.
-     * @param selectedAnswer teksten på knappen som ble trykket
      */
     private void handleAnswer(String selectedAnswer) {
         if (selectedAnswer.equals(currentFlag.getCountry())) {
@@ -212,7 +274,7 @@ public class QuizApp extends Application {
     }
 
     /**
-     * Fullfører quizen, logger resultat og viser high score.
+     * Fullfører quizen, logger resultatet og viser high score.
      */
     private void finishQuiz() {
         HighScoreManager highScoreManager = new HighScoreManager();
@@ -227,9 +289,29 @@ public class QuizApp extends Application {
         alert.setTitle("Quiz ferdig!");
         alert.setHeaderText(null);
         alert.setContentText(sb.toString());
+        Platform.runLater(alert::showAndWait);
 
-        // Bruk Platform.runLater for å vise alerten etter animasjon/layout-prosessering
-        Platform.runLater(() -> alert.showAndWait());
+        // Etter quiz returneres man til hovedmenyen
+        primaryStage.setScene(mainMenuScene);
+    }
+
+    // -----------------------------------------
+    // GET/SET FOR totalQuestions og activeFlags
+    // -----------------------------------------
+    public int getTotalQuestions() {
+        return totalQuestions;
+    }
+
+    public void setTotalQuestions(int newTotal) {
+        this.totalQuestions = newTotal;
+    }
+
+    public void setActiveFlags(List<Flag> selectedFlags) {
+        this.activeFlags = selectedFlags;
+    }
+
+    public List<Flag> getActiveFlags() {
+        return activeFlags;
     }
 
     public static void main(String[] args) {

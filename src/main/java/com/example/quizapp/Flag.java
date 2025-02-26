@@ -26,8 +26,14 @@ public class Flag implements Serializable {
         InputStream stream = getClass().getResourceAsStream(imagePath);
         if (stream == null) {
             System.err.println("Bilde ikke funnet: " + imagePath);
-            // Her kan du eventuelt returnere et standardbilde
-            return new Image(getClass().getResourceAsStream("/images/placeholder.png"));
+            // Prøv å returnere et standard placeholder-bilde
+            InputStream placeholderStream = getClass().getResourceAsStream("/images/placeholder.png");
+            if (placeholderStream != null) {
+                return new Image(placeholderStream);
+            } else {
+                // Returner et tomt bilde (1x1 transparent PNG) som fallback
+                return new Image("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=");
+            }
         }
         return new Image(stream);
     }

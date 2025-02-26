@@ -1,7 +1,6 @@
-Worldometers Logo;worldometers-logo.gif
 Afghanistan;tn_af-flag.gif
 Albania;tn_al-flag.gif
-Algerie;tn_ag-flag.gif
+Algeria;tn_ag-flag.gif
 Andorra;tn_an-flag.gif
 Angola;tn_ao-flag.gif
 Ascension Island;tn_ac-flag.gif
@@ -11,8 +10,7 @@ American Samoa;tn_as-flag.gif
 Australia;tn_au-flag.gif
 Azerbaijan;tn_aj-flag.gif
 Burkina Faso;tn_bf-flag.gif
-Bosnia and Herzegovina;tn_ba-flag.gif
-Bulgaria;tn_bg-flag.gif
+Bosnia and Herzegovina;tn_bk-flag.gif
 Barbados;tn_bb-flag.gif
 Bolivia;tn_bo-flag.gif
 Belgium;tn_be-flag.gif
@@ -20,60 +18,41 @@ Bahrain;tn_bh-flag.gif
 Brunei;tn_bn-flag.gif
 Bhutan;tn_bt-flag.gif
 Belize;tn_bl-flag.gif
-Bangladesh;tn_bk-flag.gif
-Country BC;tn_bc-flag.gif
+Bangladesh;tn_bg-flag.gif
 Brazil;tn_br-flag.gif
-Country BX;tn_bx-flag.gif
-Country BU;tn_bu-flag.gif
-Country UV;tn_uv-flag.gif
 Belarus;tn_by-flag.gif
-Country IV;tn_iv-flag.gif
 Cape Verde;tn_cv-flag.gif
-Country CB;tn_cb-flag.gif
 Cameroon;tn_cm-flag.gif
 Canada;tn_ca-flag.gif
-Country CT;tn_ct-flag.gif
-Country CD;tn_cd-flag.gif
 Côte d'Ivoire;tn_ci-flag.gif
 Switzerland;tn_ch-flag.gif
 Colombia;tn_co-flag.gif
-China;tn_cn-flag.gif
+China;ch-flag.gif
 Congo;tn_cg-flag.gif
-Country CS;tn_cs-flag.gif
 Croatia;tn_hr-flag.gif
 Cuba;tn_cu-flag.gif
 Cyprus;tn_cy-flag.gif
-Country EZ;tn_ez-flag.gif
 Denmark;tn_da-flag.gif
 Djibouti;tn_dj-flag.gif
 Dominica;tn_do-flag.gif
-Country DR;tn_dr-flag.gif
-Country KN;tn_kn-flag.gif
 Congo (DRC);tn_congo-flag.gif
 Ecuador;tn_ec-flag.gif
 Egypt;tn_eg-flag.gif
 Spain;tn_es-flag.gif
-Country EK;tn_ek-flag.gif
 Eritrea;tn_er-flag.gif
 England;tn_en-flag.gif
-Country WZ;tn_wz-flag.gif
 Ethiopia;tn_et-flag.gif
 Fiji;tn_fj-flag.gif
 Finland;tn_fi-flag.gif
 France;tn_fr-flag.gif
 Great Britain;tn_gb-flag.gif
 Gabon;tn_ga-flag.gif
-Country GG;tn_gg-flag.gif
 Gambia;tn_gm-flag.gif
 Ghana;tn_gh-flag.gif
 Greece;tn_gr-flag.gif
-Country GJ;tn_gj-flag.gif
 Guatemala;tn_gt-flag.gif
-Country GV;tn_gv-flag.gif
-Country PU;tn_pu-flag.gif
 Guyana;tn_gy-flag.gif
 Haiti;tn_ha-flag.gif
-Country VT;tn_vt-flag.gif
 Honduras;tn_ho-flag.gif
 Hungary;tn_hu-flag.gif
 Iceland;tn_ic-flag.gif
@@ -81,7 +60,6 @@ India;tn_in-flag.gif
 Indonesia;tn_id-flag.gif
 Iran;tn_ir-flag.gif
 Iraq;tn_iz-flag.gif
-Country EI;tn_ei-flag.gif
 Israel;tn_is-flag.gif
 Italy;tn_it-flag.gif
 Jamaica;tn_jm-flag.gif
@@ -90,36 +68,27 @@ Jordan;tn_jo-flag.gif
 Kazakhstan;tn_kz-flag.gif
 Kenya;tn_ke-flag.gif
 Korea;tn_kr-flag.gif
-Country KU;tn_ku-flag.gif
 Kyrgyzstan;tn_kg-flag.gif
 Laos;tn_la-flag.gif
-Country LG;tn_lg-flag.gif
 Lebanon;tn_le-flag.gif
 Lithuania;tn_lt-flag.gif
 Liechtenstein;tn_li-flag.gif
 Libya;tn_ly-flag.gif
-Country LS;tn_ls-flag.gif
-Country LH;tn_lh-flag.gif
 Luxembourg;tn_lu-flag.gif
 Madagascar;tn_ma-flag.gif
-Country MI;tn_mi-flag.gif
 Malaysia;tn_my-flag.gif
 Maldives;tn_mv-flag.gif
 Mali;tn_ml-flag.gif
 Malta;tn_mt-flag.gif
-Country RM;tn_rm-flag.gif
 Mauritania;tn_mr-flag.gif
-Country MP;tn_mp-flag.gif
 Mexico;tn_mx-flag.gif
 Micronesia;tn_fm-flag.gif
 Moldova;tn_md-flag.gif
 Mongolia;tn_mn-flag.gif
 Montenegro;tn_mg-flag.gif
-Country MJ;tn_mj-flag.gif
 Macau;tn_mo-flag.gif
 Mozambique;tn_mz-flag.gif
 Bermuda;tn_bm-flag.gif
-Country WA;tn_wa-flag.gif
 Nauru;tn_nr-flag.gif
 Nepal;tn_np-flag.gif
 Netherlands;tn_nl-flag.gif
@@ -133,10 +102,8 @@ Mauritius;tn_mu-flag.gif
 Pakistan;tn_pk-flag.gif
 Palestine;tn_ps-flag.gif
 Saint Pierre and Miquelon;tn_pm-flag.gif
-Country PP;tn_pp-flag.gif
 Panama;tn_pa-flag.gif
 Peru;tn_pe-flag.gif
-Country RP;tn_rp-flag.gif
 Poland;tn_pl-flag.gif
 Portugal;tn_po-flag.gif
 Qatar;tn_qa-flag.gif
@@ -150,55 +117,29 @@ San Marino;tn_sm-flag.gif
 East Timor;tn_tp-flag.gif
 Saudi Arabia;tn_sa-flag.gif
 Singapore;tn_sg-flag.gif
-Country RI;tn_ri-flag.gif
 Sweden;tn_se-flag.gif
 Sierra Leone;tn_sl-flag.gif
 Senegal;tn_sn-flag.gif
-Country LO;tn_lo-flag.gif
 Slovenia;tn_si-flag.gif
-Country BP;tn_bp-flag.gif
 Somalia;tn_so-flag.gif
-Country SF;tn_sf-flag.gif
-Country KS;tn_ks-flag.gif
-Country OD;tn_od-flag.gif
-Country SP;tn_sp-flag.gif
-Country CE;tn_ce-flag.gif
 Saint Vincent and the Grenadines;tn_vc-flag.gif
-Palestine;tn_palestine-flag.gif
-Country SU;tn_su-flag.gif
-Country NS;tn_ns-flag.gif
-Country SW;tn_sw-flag.gif
 Eswatini;tn_sz-flag.gif
 Syria;tn_sy-flag.gif
-Country TI;tn_ti-flag.gif
 Tanzania;tn_tz-flag.gif
 Thailand;tn_th-flag.gif
 Trinidad and Tobago;tn_tt-flag.gif
 Tonga;tn_to-flag.gif
 Tunisia;tn_tn-flag.gif
 Chad;tn_td-flag.gif
-Country TS;tn_ts-flag.gif
 Turkey;tn_tu-flag.gif
-Country TX;tn_tx-flag.gif
 Tuvalu;tn_tv-flag.gif
 United Arab Emirates;tn_ae-flag.gif
 United Kingdom;tn_uk-flag.gif
 United States;tn_us-flag.gif
 Uganda;tn_ug-flag.gif
-Country UP;tn_up-flag.gif
 Uruguay;tn_uy-flag.gif
 Uzbekistan;tn_uz-flag.gif
-Country NH;tn_nh-flag.gif
 Venezuela;tn_ve-flag.gif
 Vietnam;tn_vm-flag.gif
-Country YM;tn_ym-flag.gif
 South Africa;tn_za-flag.gif
 Zimbabwe;tn_zi-flag.gif
-Extra Country 1;extra1-flag.gif
-Extra Country 2;extra2-flag.gif
-Extra Country 3;extra3-flag.gif
-Extra Country 4;extra4-flag.gif
-Extra Country 5;extra5-flag.gif
-Extra Country 6;extra6-flag.gif
-Extra Country 7;extra7-flag.gif
-Extra Country 8;extra8-flag.gif
