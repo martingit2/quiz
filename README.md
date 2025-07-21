@@ -61,6 +61,6 @@ Dette er en fullverdig desktop-applikasjon som lar brukere teste sin kunnskap om
 
 ---
 ## Refleksjon rundt oppgaven
-Dette prosjektet ble utviklet som en del av den obligatoriske oppgaven 1 i OBJ2100. En separat `FlagDownloader`-app ble også utviklet for å effektivisere innsamlingen av bildemateriell.
+Dette prosjektet ble utviklet som en del av den obligatoriske oppgaven for OBJ2100. En separat `FlagDownloader`-app ble også utviklet for å effektivisere innsamlingen av bildemateriell.
 
 **Forfatter:** Martin Pettersen
