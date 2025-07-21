@@ -1,82 +1,66 @@
-# Flag Quiz Application
+# JavaFX Flag Quiz
 
-## Description
-The **Flag Quiz Application** is an interactive quiz game where users test their knowledge of national flags. The application includes a quiz mode for users and an admin panel for managing flags and quiz settings.
-
-## Installation Instructions
-### Prerequisites
-- **Java 17+** installed on your system
-- **JavaFX** (required for GUI)
-- **Maven or Gradle** (if you want to manage dependencies)
-
-### Steps to Run
-1. **Clone or Extract the Project**
-   ```sh
-   git clone https://github.com/martingit2/quiz
-   ```
-   Or manually extract the ZIP file.
-
-2. **Navigate to the Project Directory**
-   ```sh
-   cd FlagQuizApp
-   ```
-
-3. **Compile and Run the Application**
-   ```sh
-   javac -cp . --module-path "<path_to_javafx>" --add-modules javafx.controls,javafx.fxml com/example/quizapp/QuizApp.java
-   java -cp . --module-path "<path_to_javafx>" --add-modules javafx.controls,javafx.fxml com.example.quizapp.QuizApp
-   ```
-   *(Make sure to replace `<path_to_javafx>` with the actual path where JavaFX is installed.)*
-
-## Usage Instructions
-### Playing the Quiz
-1. Start the application.
-2. Select the **Start Quiz** option.
-3. Identify the correct flag from four multiple-choice options.
-4. Scores are saved, and the top five are displayed.
-
-### Admin Panel
-1. Click on **Admin Panel** to access the settings.
-2. Add, edit, or remove flag entries.
-3. Adjust the number of questions per quiz.
-4. Save changes, which are stored in `flags.ser`.
-
-## File Structure
-```
-FlagQuizApp/
-├── src/
-│   ├── com/example/quizapp/QuizApp.java        # Main application file
-│   ├── com/example/quizapp/FlagManager.java    # Handles flag storage and retrieval
-│   ├── com/example/quizapp/AdminPanel.java     # Admin panel for managing flags
-│   ├── com/example/quizapp/GameConfigPanel.java # Quiz settings management
-│   ├── com/example/quizapp/HighScoreManager.java # Stores and retrieves highscores
-│   ├── com/example/quizapp/QuizLogger.java     # Logs quiz history
-│   ├── com/example/quizapp/Flag.java           # Represents a flag object
-│   ├── com/example/quizapp/HighScoreEntry.java # Stores individual scores
-├── resources/
-│   ├── images/   # Folder containing flag images
-│   ├── flags.csv # CSV file with flag data
-│   ├── flags.ser # Serialized flag storage
-│   ├── highscores.ser # Serialized highscore storage
-│   ├── quiz_history.txt # Log of previous quizzes
-└── README.md  # This file
-```
-
-## Dependencies
-- **JavaFX** (For UI rendering)
-
-## Author
-- **Martin Pettersen**
-- Student ID: **256031**
-
-## Acknowledgments
-This project was developed as part of the **OBJ2100 (2025 Vår) Obligatory Assignment 1**.
-- AI tools (ChatGPT) were used to **optimize code, debug errors, and suggest improvements**.
-- Some parts of the file handling and UI improvements were refined based on AI recommendations.
+Et interaktivt og dynamisk flagg-quiz-spill bygget i ren Java med JavaFX. Dette prosjektet ble utviklet som en obligatorisk oppgave og demonstrerer god objektorientert design, filhåndtering og et rent grafisk brukergrensesnitt.
 
 ---
-### **Note on Flag Downloader**
-The **FlagDownloader** application was developed separately to automate the downloading of flag images. It is **not part of this main application** but was used to collect flag images efficiently from `worldometers.info`. The downloaded images were then stored in the `resources/images/` folder for use in the quiz.
 
-This README provides essential instructions to run and modify the **Flag Quiz Application**. 🚀
+## Visuell Oversikt
 
+Her er noen glimt av applikasjonens hovedfunksjoner, fra den enkle hovedmenyen til det mer avanserte konfigurasjonspanelet.
+
+| Hovedmeny | Quiz i Aksjon | Spillkonfigurasjon |
+| :---------------------------------: | :---------------------------------: | :---------------------------: |
+| ![Hovedmeny](./docs/screenshots/quiz1.png) | ![Quiz i Aksjon](./docs/screenshots/quiz2.png) | ![Spillkonfigurasjon](./docs/screenshots/quiz4.png) |
+| *En ren og enkel startmeny.* | *Et interaktivt quiz-grensesnitt.* | *Adminpanel for å skreddersy quizen.* |
+
+---
+
+## Om Prosjektet
+
+Dette er en fullverdig desktop-applikasjon som lar brukere teste sin kunnskap om verdens flagg. Appen er delt inn i to hoveddeler: en spillmodus for brukere og et adminpanel for å administrere innholdet i quizen.
+
+### Hovedfunksjoner
+
+*   ✅ **Interaktiv Quiz:** En flervalgsquiz med dynamisk genererte spørsmål og svaralternativer.
+*   ✅ **Visuelle Animasjoner:** Appen bruker enkle animasjoner for å gi umiddelbar tilbakemelding på riktige og gale svar.
+*   ✅ **High Score-liste:** Lagrer og viser de fem beste resultatene lokalt.
+*   ✅ **Robust Adminpanel:**
+    *   Full CRUD-funksjonalitet (Create, Read, Update, Delete) for flagg og land.
+    *   Visuell filvelger for å koble land til riktig bilde.
+    *   Mulighet for å konfigurere antall spørsmål og hvilke flagg som skal inkluderes i en runde.
+*   ✅ **Persistent Lagring:** All data (flagg, high scores, spillhistorikk) lagres lokalt ved hjelp av Java-serialisering og enkle tekstfiler.
+
+### Teknologistack & Konsepter
+
+*   **Språk:** Java
+*   **GUI Rammeverk:** JavaFX
+*   **Byggesystem:** Apache Maven
+*   **Kjernekonsepter:** Objektorientert programmering (OOP), fil-I/O (serialisering, CSV-parsing), event-drevet programmering.
+
+---
+
+## Komme i Gang
+
+### Forutsetninger
+*   Java JDK 17 eller nyere
+*   Apache Maven
+
+### Kjøre Applikasjonen
+
+1.  **Klon repositoriet:**
+    ```bash
+    git clone https://github.com/martingit2/quiz.git
+    cd quiz
+    ```
+
+2.  **Kompiler og kjør med Maven:**
+    Den enkleste måten å kjøre appen på er med JavaFX Maven-pluginen, som håndterer alle moduler for deg.
+    ```bash
+    mvn clean javafx:run
+    ```
+
+---
+## Refleksjon rundt oppgaven
+Dette prosjektet ble utviklet som en del av den obligatoriske oppgaven 1 i OBJ2100. En separat `FlagDownloader`-app ble også utviklet for å effektivisere innsamlingen av bildemateriell.
+
+**Forfatter:** Martin Pettersen
