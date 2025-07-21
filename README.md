@@ -11,7 +11,7 @@ Her er noen glimt av applikasjonens hovedfunksjoner, fra den enkle hovedmenyen t
 | Hovedmeny | Quiz i Aksjon | Spillkonfigurasjon |
 | :---------------------------------: | :---------------------------------: | :---------------------------: |
 | ![Hovedmeny](./docs/screenshots/quiz1.png) | ![Quiz i Aksjon](./docs/screenshots/quiz2.png) | ![Spillkonfigurasjon](./docs/screenshots/quiz4.png) |
-| *En ren og enkel startmeny.* | *Et interaktivt quiz-grensesnitt.* | *Adminpanel for å skreddersy quizen.* |
+| *En ren og enkel startmeny.* | *Adminpanel for å skreddersy quizen.* | *Et interaktivt quiz-grensesnitt.* |
 
 ---
 
